@@ -1,0 +1,7 @@
+names:
+- helmet_on
+- helmet_off
+nc: 2
+test: /content/helmet_dataset/test/images
+train: /content/helmet_dataset/train/images
+val: /content/helmet_dataset/valid/images
