@@ -19,6 +19,12 @@ A complete Edge AI model compression pipeline built from scratch.
 - `har_pruned.pth` — Distilled + 40% pruned, 317 KB, 94.30%
 - `har_quantized.pth` — Fully compressed, 84 KB, 94.40%
 
+## CNN on MNIST
+- Architecture: Conv2d → MaxPool → Conv2d → MaxPool → Linear
+- Parameters: 421,642
+- Accuracy: 98.61%
+- Comparison: Flat network 97.29% → CNN 98.61% (half the errors)
+
 ## Key Results
 
 | Technique | Size | Accuracy |
