@@ -1,6 +1,6 @@
 # EDGE-AI — From Scratch to Deployment
 
-> Built by a first-year CSE student in 2 days.
+> Built by a first-year CSE student in 3 days.
 > Every line understood, not copy-pasted.
 
 ---
@@ -73,6 +73,7 @@ Custom trained YOLOv8n for real-time safety violation detection.
 - CLAHE preprocessing for dusty/hazy environments
 - Count-based violation detection
 - Fail-safe design — uncertain = violation
+- NMS tuned for crowded construction environments
 
 ---
 
@@ -88,10 +89,44 @@ Architecture: Conv2d → MaxPool → Conv2d → MaxPool → Linear
 
 ---
 
-### 6. ONNX Export + Deployment
-Models exported to ONNX for cross-platform deployment.
+### 6. ONNX Export
+Models exported to ONNX universal format.
 Verified running outside PyTorch using ONNX Runtime.
-Compatible with Raspberry Pi, mobile, edge chips.
+Compatible with Raspberry Pi, mobile, edge chips, any framework.
+
+---
+
+### 7. TFLite Deployment
+Converted to TensorFlow Lite for real device deployment.
+
+| Metric | Value |
+|--------|-------|
+| Size | 113 KB |
+| Accuracy | 97.30% |
+| Original PyTorch | 430 KB |
+| Compression | 4x smaller |
+
+Verified running on TFLite interpreter — zero accuracy loss.
+Ready for Android, Raspberry Pi, ESP32 deployment.
+No Python required on target device.
+No internet required.
+No cloud required.
+
+---
+
+### 8. Complete Deployment Pipeline
+
+| Format | Size | Accuracy | Target |
+|--------|------|----------|--------|
+| PyTorch original | 430 KB | 97.29% | Training |
+| Post-Training Quant | 112 KB | 96.8% | Server |
+| QAT | 117 KB | 97.1% | Server |
+| Pruned + Quantized | 112 KB | 97.0% | Server |
+| ONNX | 7 KB | 97.29% | Universal |
+| TFLite | 113 KB | 97.30% | Android/Pi/ESP32 |
+
+Train once in PyTorch.
+Deploy everywhere via ONNX and TFLite.
 
 ---
 
@@ -108,6 +143,9 @@ Compatible with Raspberry Pi, mobile, edge chips.
 - CLAHE contrast enhancement
 - Fail-safe system design principles
 - Accuracy-latency tradeoff for edge hardware
+- Adversarial robustness considerations
+- Frame dropping vs frame skipping for real-time inference
+- Negative transfer in multi-class distillation
 
 ---
 
@@ -117,7 +155,8 @@ Compatible with Raspberry Pi, mobile, edge chips.
 - Deployable at construction sites, factories, warehouses
 - Runs on Raspberry Pi offline — no internet required
 - Detects violations in 7.7ms — faster than human reaction
-- Potential to prevent workplace accidents
+- Count-based detection — heads vs helmets = violation count
+- Potential to prevent 48,000 workplace deaths per year in India
 
 **HAR pipeline use case:**
 - Runs on ESP32/STM32 wearable device
@@ -128,13 +167,14 @@ Compatible with Raspberry Pi, mobile, edge chips.
 ---
 
 ## Tech Stack
-PyTorch · YOLOv8 · ONNX Runtime · OpenCV · NumPy · Google Colab
+PyTorch · YOLOv8 · ONNX Runtime · TFLite · OpenCV · NumPy · Google Colab
 
 ---
 
 ## What's Next
+- Flask dashboard — helmet detector as deployable web product
+- CoreML conversion — iPhone/iPad deployment
 - Raspberry Pi deployment — real hardware inference
-- TFLite conversion — Android + microcontroller deployment
 - Autonomous agent combining SLAM + YOLO + Edge LLM
 - Real construction site testing and client demo
 
