@@ -130,6 +130,27 @@ Deploy everywhere via ONNX and TFLite.
 
 ---
 
+## Real World Pipeline Benchmark
+End-to-end latency on 100 test images (GPU):
+
+| Stage | Avg | Min | Max |
+|-------|-----|-----|-----|
+| Image decode | 2.56ms | 1.15ms | 8.05ms |
+| Model inference | 22.48ms | 11.05ms | 71.58ms |
+| Postprocessing | 1.52ms | 0.21ms | 6.94ms |
+| TOTAL | 26.56ms | 12.42ms | 78.58ms |
+
+Effective FPS: 37.7
+Camera budget: 40ms (25 FPS)
+Headroom: 13.4ms for alerts and logging
+PASS — real-time capable
+
+Key finding: CLAHE preprocessing added 43ms overhead
+with no accuracy benefit — removed from pipeline.
+YOLO handles low-contrast images internally.
+
+---
+
 ## Key Concepts Implemented From Scratch
 
 - Forward pass, backpropagation, gradient descent
